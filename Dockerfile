@@ -25,7 +25,7 @@ RUN mkdir -p /opt && \
 
 # Install Tools
 RUN apt-get -q update && apt-get install -qy unzip \
-    wget vim curl iputils-ping jq && \ 
+    apt-utils wget vim curl iputils-ping jq && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
@@ -44,11 +44,11 @@ RUN test -n "$URL"
 
 # Install MID Server
 RUN wget --progress=bar:force --no-check-certificate \
-    ${URL} -O /tmp/mid.zip && \
-    unzip -d /opt /tmp/mid.zip && \
-    chmod -R 755 /opt/agent && \
-    chown -R midserver:midserver /opt/* && \
-    mv /opt/agent/config.xml /opt/. && \
+    ${URL} -O /tmp/mid.deb && \
+    apt-get install /tmp/mid.deb && \
+    cp /opt/servicenow/mid/agent/config.xml /opt/servicenow/mid/agent/config.xml.orig && \
+    chown -R midserver:midserver /opt/servicenow && \
+    chmod -R 775 /opt/servicenow/mid/agent/*.sh && \   
     rm -rf /tmp/*
 
 # Configure Start
