@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       instanceUrl:
-        description: 'Instance URL'     
+        description: 'Instance URL'
         required: true
         default: 'default-url'
       midUserName:
@@ -30,7 +30,7 @@ on:
       midName:
         description: 'MID Name'
         required: true
-        default: 'default-host'     
+        default: 'default-host'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
