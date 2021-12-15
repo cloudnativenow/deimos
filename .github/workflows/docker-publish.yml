@@ -9,7 +9,12 @@ name: docker-publish
 #   pull_request:
 #     branches: [ master ]
 on: 
-  [workflow_dispatch]
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'url'     
+        required: true
+        default: 'https://install.service-now.com/glide/distribution/builds/package/app-signed/mid-linux-installer/2021/07/15/mid-linux-installer.rome-06-23-2021__patch0-07-07-2021_07-15-2021_1403.linux.x86-64.deb'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -31,11 +36,14 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Build Docker Image
+      env: 
+        URL: ${{ github.event.inputs.url }}    
       run: |
         docker build --no-cache \
         --build-arg IMAGE_VERSION="1.0" \
         --build-arg IMAGE_CREATE_DATE="`date -u +"%Y-%m-%dT%H:%M:%SZ"`" \
         --build-arg IMAGE_SOURCE_REVISION="`git rev-parse HEAD`" \
+        --build-arg URL=$URL \
         -f Dockerfile \
         -t "pangealab/deimos:latest" .
     
