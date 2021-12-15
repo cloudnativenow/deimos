@@ -25,16 +25,16 @@ RUN mkdir -p /opt && \
 
 # Install Tools
 RUN apt-get -q update && apt-get install -qy unzip \
-    apt-utils wget vim curl iputils-ping jq && \ 
+    apt-utils procps wget vim curl iputils-ping jq && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
 
 # Environment Variables
-ENV HOST "default-host"
-ENV SN_HOST_NAME ""
-ENV USER_NAME "default-user"
-ENV PASSWORD "default-password"
+ENV INSTANCE_URL "default-url"
+ENV MID_USERNAME "default-user"
+ENV MID_PASSWORD "default-password"
+ENV MID_NAME "default-host"
 
 # Arguments
 ARG URL
@@ -47,6 +47,7 @@ RUN wget --progress=bar:force --no-check-certificate \
     ${URL} -O /tmp/mid.deb && \
     apt-get install /tmp/mid.deb && \
     cp /opt/servicenow/mid/agent/config.xml /opt/servicenow/mid/agent/config.xml.orig && \
+    rm /opt/servicenow/mid/agent/config.xml && \
     chown -R midserver:midserver /opt/servicenow && \
     chmod -R 775 /opt/servicenow/mid/agent/*.sh && \   
     rm -rf /tmp/*
