@@ -28,16 +28,22 @@ then
     
     cp /opt/servicenow/mid/agent/config.xml.orig /opt/servicenow/mid/agent/config.xml
     
+    # Set Instance URL
     if [[ ! -z "$INSTANCE_URL" ]]
     then
         echo "Docker: configuring url using ${INSTANCE_URL}"
         sed -i "s|https://YOUR_INSTANCE.service-now.com|${INSTANCE_URL}|g" /opt/servicenow/mid/agent/config.xml
     fi
  
+    # Set MID User Name
     echo "Docker: configuring mid.instance.username using ${MID_USERNAME}"
     sed -i "s|YOUR_INSTANCE_USER_NAME_HERE|${MID_USERNAME}|g" /opt/servicenow/mid/agent/config.xml
+    
+    # Set MID Password
     echo "Docker: configuring mid.instance.password using ******"
     sed -i "s|YOUR_INSTANCE_PASSWORD_HERE|${MID_PASSWORD}|g" /opt/servicenow/mid/agent/config.xml
+    
+    # Set MID Name
     echo "Docker: configuring name using ${MID_NAME}"
     sed -i "s|YOUR_MIDSERVER_NAME_GOES_HERE|${MID_NAME}|g" /opt/servicenow/mid/agent/config.xml
 
