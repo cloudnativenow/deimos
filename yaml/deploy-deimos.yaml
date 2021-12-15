@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deimos
+  labels:
+    app: deimos
+    monitor: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deimos
+  template:
+    metadata:
+      labels:
+        app: deimos
+        monitor: 'true'
+    spec:
+      containers:
+      - name: deimos
+        image: pangealab/deimos:latest
+        env:
+          - name: INSTANCE_URL
+            value: $INSTANCE_URL
+          - name: MID_USERNAME
+            value: $MID_USERNAME
+          - name: MID_PASSWORD
+            value: $MID_PASSWORD
+          - name: MID_NAME
+            value: $MID_NAME
