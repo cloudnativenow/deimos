@@ -10,11 +10,11 @@ org.opencontainers.image.description="ServiceNow (MID) Java Service for Kubernet
 org.opencontainers.image.created=$IMAGE_CREATE_DATE \
 org.opencontainers.image.version=$IMAGE_VERSION \
 org.opencontainers.image.authors="Anthony Angelo" \
-org.opencontainers.image.url="https://github.com/pangealab/deimos/" \
-org.opencontainers.image.documentation="https://github.com/pangealab/deimos/README.md" \
+org.opencontainers.image.url="https://github.com/cloudnativenow/deimos/" \
+org.opencontainers.image.documentation="https://github.com/cloudnativenow/deimos/README.md" \
 org.opencontainers.image.vendor="Anthony Angelo" \
 org.opencontainers.image.licenses="MIT" \
-org.opencontainers.image.source="https://github.com/pangealab/deimos.git" \
+org.opencontainers.image.source="https://github.com/cloudnativenow/deimos.git" \
 org.opencontainers.image.revision=$IMAGE_SOURCE_REVISION
 
 # Prepare Install
